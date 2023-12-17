@@ -16,6 +16,14 @@
     "remove_previous": {
       "suggested_key": "Ctrl+Shift+L",
       "description": "Remove second recent tabs"
+    },
+    "remove_first": {
+      "suggested_key": "Ctrl+Shift+X",
+      "description": "Remove first tab"
+    },
+    "remove_last": {
+      "suggested_key": "Ctrl+Shift+F",
+      "description": "Remove last tab"
     }
   }
 

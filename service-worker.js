@@ -4,17 +4,34 @@ chrome.tabs.onActivated.addListener(storeTabs);
 chrome.commands.onCommand.addListener((command) => {
   console.log(`Command: ${command}`);
 
-  if(command == "clear_tabs"){
-  console.log(+previousTabs);
-  previousTabs.forEach(element => {
-    chrome.tabs.remove(element);
-  });
-  }
-  else if(command == "remove_previous"){
-    chrome.tabs.remove(previousTabs[previousTabs.length-2])
+  switch(command){
+      case "clear_tabs":
+        previousTabs.forEach(element => {
+          chrome.tabs.remove(element);
+        arrayRemove(previousTabs, element);
+        });
+        break;
+    case "remove_previous":
+      chrome.tabs.remove(previousTabs[previousTabs.length-2]);
+      arrayRemove(previousTabs, previousTabs[previousTabs.length-2]);
+      break;
+    case "remove_first":
+      chrome.tabs.remove(previousTabs[0]);
+      previousTabs.splice(0, 1);
+      break;
+    case "remove_last":
+      chrome.tabs.remove(previousTabs[previousTabs.length-1]);
+      previousTabs.pop();
+      break;
   }
 
 });
+
+function arrayRemove(arr, value) {
+  return arr.filter(function (matchValue) {
+      return matchValue == value;
+  });
+}
 
 async function storeTabs(activeInfo) {
   try {
