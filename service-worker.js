@@ -5,12 +5,12 @@ chrome.commands.onCommand.addListener((command) => {
   console.log(`Command: ${command}`);
 
   switch(command){
-      case "clear_tabs":
-        previousTabs.forEach(element => {
-          chrome.tabs.remove(element);
-        arrayRemove(previousTabs, element);
-        });
-        break;
+    case "clear_tabs":
+      previousTabs.forEach(element => {
+        chrome.tabs.remove(element);
+      arrayRemove(previousTabs, element);
+      });
+      break;
     case "remove_previous":
       chrome.tabs.remove(previousTabs[previousTabs.length-2]);
       arrayRemove(previousTabs, previousTabs[previousTabs.length-2]);
