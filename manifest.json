@@ -12,6 +12,10 @@
     "clear_tabs": {
       "suggested_key": "Ctrl+M",
       "description": "Clear all tabs"
+    },
+    "remove_previous": {
+      "suggested_key": "Ctrl+Shift+L",
+      "description": "Remove second recent tabs"
     }
   }
 

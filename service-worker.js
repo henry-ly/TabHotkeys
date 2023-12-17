@@ -1,5 +1,5 @@
 let previousTabs = new Array();
-chrome.tabs.onActivated.addListener(moveToFirstPosition);
+chrome.tabs.onActivated.addListener(storeTabs);
 
 chrome.commands.onCommand.addListener((command) => {
   console.log(`Command: ${command}`);
@@ -10,22 +10,19 @@ chrome.commands.onCommand.addListener((command) => {
     chrome.tabs.remove(element);
   });
   }
+  else if(command == "remove_previous"){
+    chrome.tabs.remove(previousTabs[previousTabs.length-2])
+  }
 
+});
 
-  });
-
-async function moveToFirstPosition(activeInfo) {
+async function storeTabs(activeInfo) {
   try {
     previousTabs.push(activeInfo.tabId);
-
-//    await chrome.tabs.move(activeInfo.tabId, {index: 0});
-
     console.log(previousTabs);
-    console.log("Success.");
-
   } catch (error) {
     if (error == "Error: Tabs cannot be edited right now (user may be dragging a tab).") {
-      setTimeout(() => moveToFirstPosition(activeInfo), 50);
+      setTimeout(() => storeTabs(activeInfo), 50);
     } else {
       console.error(error);
     }
